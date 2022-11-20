@@ -57,13 +57,8 @@ class AuthController extends Controller
         );
     }
     public function logout(Request $request){
-        Auth::attempt([
-            'email'=>$request->email,
-            'password'=>$request->password
-        ]);
-
-        Auth::user()->token()->delete();
-        return response(['message'=>'Successfully Logging out']);
+        Auth::user()->currentAccessToken()->delete();
+        return $this->sucess('','Log out');
     }
 
 }
